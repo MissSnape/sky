@@ -1,80 +1,81 @@
 import React from "react";
+import * as S from "./TracksPayerStyle";
 
 
 function PlayerPlug() {
     return (
-      <div className="bar__content">
-        <div className="bar__player-progress"></div>
-        <div className="bar__player-block">
-          <div className="bar__player player">
-            <div className="player__controls">
-              <div className="player__btn-prev">
-                <svg className="player__btn-prev-svg" alt="prev">
+      <S.BarContent className="bar__content">
+        <S.BarPlayerProgress className="bar__player-progress"></S.BarPlayerProgress>
+        <S.BarPlayerBlock className="bar__player-block">
+          <S.BarPlayer className="bar__player player">
+            <S.PlayerControls className="player__controls">
+              <S.PlayerBtnPrev className="player__btn-prev">
+                <S.PlayerBtnPrevSvg className="player__btn-prev-svg" alt="prev">
                   <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
-                </svg>
-              </div>
-              <div className="player__btn-play _btn">
-                <svg className="player__btn-play-svg" alt="play">
+                </S.PlayerBtnPrevSvg>
+              </S.PlayerBtnPrev>
+              <S.PlayerBtnPlay className="player__btn-play _btn">
+                <S.PlayerBtnPlaySvg className="player__btn-play-svg" alt="play">
                   <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
-                </svg>
-              </div>
-              <div className="player__btn-next">
-                <svg className="player__btn-next-svg" alt="next">
+                </S.PlayerBtnPlaySvg>
+              </S.PlayerBtnPlay>
+              <S.PlayerBtnNext className="player__btn-next">
+                <S.PlayerBtnNextSvg className="player__btn-next-svg" alt="next">
                   <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
-                </svg>
-              </div>
-              <div className="player__btn-repeat _btn-icon">
-                <svg className="player__btn-repeat-svg" alt="repeat">
+                </S.PlayerBtnNextSvg>
+              </S.PlayerBtnNext>
+              <S.PlayerBtnRepeat className="player__btn-repeat _btn-icon">
+                <S.PlayerBtnRepeatSvg className="player__btn-repeat-svg" alt="repeat">
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
-                </svg>
-              </div>
-              <div className="player__btn-shuffle _btn-icon">
-                <svg className="player__btn-shuffle-svg" alt="shuffle">
+                </S.PlayerBtnRepeatSvg>
+              </S.PlayerBtnRepeat>
+              <S.PlayerBtnShuffle className="player__btn-shuffle _btn-icon">
+                <S.PlayerBtnShuffleSvg className="player__btn-shuffle-svg" alt="shuffle">
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-                </svg>
-              </div>
-            </div>
+                </S.PlayerBtnShuffleSvg>
+              </S.PlayerBtnShuffle>
+            </S.PlayerControls>
   
-            <div className="player__track-play track-play">
-              <div className="track-play__contain">
+            <S.PlayerTrackPlay className="player__track-play track-play">
+              <S.TrackPlayContain className="track-play__contain">
               <img
                 src="img/plug/playerPlug.svg"
                 alt="plug"
               ></img>
-              </div>
+              </S.TrackPlayContain>
   
-              <div className="track-play__like-dis">
-                <div className="track-play__like _btn-icon">
-                  <svg className="track-play__like-svg" alt="like">
+              <S.TrackPlaytrackLikDdis className="track-play__like-dis">
+                <S.TrackPlaytrackLike className="track-play__like _btn-icon">
+                  <S.TrackPlaytracklikeSvg className="track-play__like-svg" alt="like">
                     <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-                  </svg>
-                </div>
-                <div className="track-play__dislike _btn-icon">
-                  <svg className="track-play__dislike-svg" alt="dislike">
+                  </S.TrackPlaytracklikeSvg>
+                </S.TrackPlaytrackLike>
+                <S.TrackPlaytrackDislike className="track-play__dislike _btn-icon">
+                  <S.TrackPlaytrackDislikeSvg className="track-play__dislike-svg" alt="dislike">
                     <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bar__volume-block volume">
-            <div className="volume__content">
-              <div className="volume__image">
-                <svg className="volume__svg" alt="volume">
+                  </S.TrackPlaytrackDislikeSvg>
+                </S.TrackPlaytrackDislike>
+              </S.TrackPlaytrackLikDdis>
+            </S.PlayerTrackPlay>
+          </S.BarPlayer>
+          <S.BarVolumeBlock className="bar__volume-block volume">
+            <S.VolumeContent className="volume__content">
+              <S.VolumeImg className="volume__image">
+                <S.VolumeSvg className="volume__svg" alt="volume">
                   <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-                </svg>
-              </div>
-              <div className="volume__progress _btn">
+                </S.VolumeSvg>
+              </S.VolumeImg>
+              <S.VolumeProgress className="volume__progress _btn">
                 <input
                   className="volume__progress-line _btn"
                   type="range"
                   name="range"
                 ></input>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </S.VolumeProgress>
+            </S.VolumeContent>
+          </S.BarVolumeBlock>
+        </S.BarPlayerBlock>
+      </S.BarContent>
     );
   }
   

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
 
 import { TracsPlayer } from './components/TracsPlayer';
 import { SideBar } from './components/SideBar';
@@ -12,6 +11,8 @@ import { TracsList } from './components/TracsList';
 import { PlayerPlug } from './components/PlayerPlug';
 import { TrackListPlug } from './components/TrackListPlug';
 import { SideBarPlug } from './components/SideBarPlug';
+import * as S from './components/appStyles';
+
 function App() { 
   const [isLoading, setLoadingStatus] = useState(true);
   const switchLoading = () => setLoadingStatus(!isLoading);
@@ -19,37 +20,28 @@ function App() {
     setTimeout(switchLoading, 5000);
   }, []);
   return (
-    <div className="wrapper">
-      <div className="container">
-        <main className="main">
-          <nav className="main__nav nav">
-            <div className="nav__logo logo">
-              <img className="logo__image" src="img/logo.png" alt="logo"></img>
-            </div>
-            <NavBurger/>
-           
-          </nav>
-          <div className="main__centerblock centerblock">
+    <S.Wrapper className="wrapper">
+      <S.Container className="container">
+        <S.Main className="main">
+          <NavBurger />
+          <S.MainCenterblock className="main__centerblock centerblock">
             <Search />
-            <h2 className="centerblock__h2">Треки</h2>
-            <Filters/>
-            <div className="centerblock__content">
+            <S.CenterblockH2 className="centerblock__h2">Треки</S.CenterblockH2>
+            <Filters />
+            <S.CenterblockContent className="centerblock__content">
               <TrackListHeader />
-              {isLoading ? <TrackListPlug /> : <TracsList/>}
-              
-            </div>
-          </div>
-          <div className="main__sidebar sidebar">
+              {isLoading ? <TrackListPlug /> : <TracsList />}
+            </S.CenterblockContent>
+          </S.MainCenterblock>
+          <S.MainSidebar className="main__sidebar sidebar">
             <User />
             {isLoading ? <SideBarPlug /> : <SideBar />}
-          </div>
-        </main>
-        <div className="bar">
-        {isLoading ? <PlayerPlug />: <TracsPlayer/>}
-        </div>
+          </S.MainSidebar>
+        </S.Main>
+        <S.Bar className="bar">{isLoading ? <PlayerPlug /> : <TracsPlayer />}</S.Bar>
         <footer className="footer"></footer>
-      </div>
-    </div>
+      </S.Container>
+    </S.Wrapper>
   );
 }
 export default App;

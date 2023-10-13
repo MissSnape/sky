@@ -1,34 +1,34 @@
 import React from "react";
 import { tracks } from '../data';
-
+import *as S from "./filterStyle";
 function ByArtist({ toggleVisibility, filter }) {
   return (
     <>
-      <div
-        className={
-          'filter__button button-author _btn-text' +
-          `${filter === 'author' && ' filter__button_clicked'}`
+    <S.FilterButton
+      className={
+        'filter__button button-author _btn-text' +
+        `${filter === 'author' && ' filter__button_clicked'}`
+      }
+      onClick={() => {
+        if (filter === 'author') {
+          toggleVisibility('');
+        } else {
+          toggleVisibility('author');
         }
-        onClick={() => {
-          if (filter === 'author') {
-            toggleVisibility('');
-          } else {
-            toggleVisibility('author');
-          }
-        }}
-      >
-        исполнителю
-      </div>
-      {filter === 'author' && (
-        <div className="filter__menu filter__menu_left">
-          {tracks.map((track) => (
-            <div key={track.id} className="filter__menu_item">
-              {track.author}
-            </div>
-          ))}
-        </div>
-      )}
-    </>
+      }}
+    >
+      исполнителю
+    </S.FilterButton>
+    {filter === 'author' && (
+      <S.FilterMenuLeft className="filter__menu filter__menu_left">
+        {tracks.map((track) => (
+          <S.FilterMenuItem key={track.id} className="filter__menu_item">
+            {track.author}
+          </S.FilterMenuItem>
+        ))}
+      </S.FilterMenuLeft>
+    )}
+  </>
   );
 }
 

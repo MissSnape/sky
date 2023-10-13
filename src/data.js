@@ -11,3 +11,4 @@ export const tracks = [
     { title: 'Morena',info: '', author: 'Tom Boxer', album: 'Soundz Made in Romania', time: '3:36', id: '10' },
     { title: '',info: '', author: '', album: '', time: '', id: '11' },
 ];
+console.log(tracks[0].title);

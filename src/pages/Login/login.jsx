@@ -8,12 +8,27 @@ const Login = () => {
     navigate('/');
   };
   return(
+    <S.PageContainer>
+    <S.Logforms>
 <S.LoginForm>
-      <input placeholder="Введите логин"></input>
-      <input placeholder="Введите пароль"></input>
+<S.inputLog>
+   <S.ModalInput
+                type="text"
+                name="login"
+                placeholder="Почта"
+              />
+              <S.ModalInput
+                type="password"
+                name="password"
+                placeholder="Пароль"
+                
+              />
+      </S.inputLog>
       <button onClick={addToken}>Войти</button>
       <button>Зарегистрироваться</button>
     </S.LoginForm>
+    </S.Logforms>
+    </S.PageContainer>
     );
 };
 export default Login;

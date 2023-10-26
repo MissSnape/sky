@@ -3,15 +3,15 @@ import * as S from './loginStyle';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
-  const addToken = () => {
-    localStorage.setItem('Token', 'lfd123mkw1ewqsakl');
+  const addUser = () => {
+    localStorage.setItem('user', 'lfd123mkw1ewqsakl');
     navigate('/');
   };
   return(
     <S.PageContainer>
     <S.Logforms>
 <S.LoginForm>
-<S.inputLog>
+
    <S.ModalInput
                 type="text"
                 name="login"
@@ -23,9 +23,11 @@ const Login = () => {
                 placeholder="Пароль"
                 
               />
-      </S.inputLog>
-      <button onClick={addToken}>Войти</button>
-      <button>Зарегистрироваться</button>
+     
+      <S.ExitButton onClick={addUser}>Войти
+      </S.ExitButton>
+      <S.RegistrationButton>Зарегистрироваться</S.RegistrationButton>
+      
     </S.LoginForm>
     </S.Logforms>
     </S.PageContainer>

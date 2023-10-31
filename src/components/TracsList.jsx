@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from './tracsStyle';
-import { tracks } from "../data";
-function TracsList({ setActivTrack, setIsPlaying }) {
+//import { tracks } from "../data";
+function TracsList({ setActivTrack, setIsPlaying, tracks}) {
   return (
     <S.ContentPlaylist className="content__playlist playlist">
       {tracks.map((track) => (
@@ -9,6 +9,7 @@ function TracsList({ setActivTrack, setIsPlaying }) {
           key={track.id}
           className="playlist__item"
           onClick={() => {
+
             setActivTrack(track);
             setIsPlaying(true);
           }}

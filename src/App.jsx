@@ -1,47 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import AppRoutes from './routes';
+const App = () => {
+  return <AppRoutes />;
+};
 
-import { TracsPlayer } from './components/TracsPlayer';
-import { SideBar } from './components/SideBar';
-import { Filters } from './components/filters';
-import { Search } from './components/Search';
-import { TrackListHeader } from './components/HeaderTrackList';
-import { User } from './components/users';
-import { NavBurger } from './components/NavBurger';
-import { TracsList } from './components/TracsList';
-import { PlayerPlug } from './components/PlayerPlug';
-import { TrackListPlug } from './components/TrackListPlug';
-import { SideBarPlug } from './components/SideBarPlug';
-import * as S from './components/appStyles';
-
-function App() { 
-  const [isLoading, setLoadingStatus] = useState(true);
-  const switchLoading = () => setLoadingStatus(!isLoading);
-  useEffect(() => {
-    setTimeout(switchLoading, 5000);
-  }, []);
-  return (
-    <S.Wrapper className="wrapper">
-      <S.Container className="container">
-        <S.Main className="main">
-          <NavBurger />
-          <S.MainCenterblock className="main__centerblock centerblock">
-            <Search />
-            <S.CenterblockH2 className="centerblock__h2">Треки</S.CenterblockH2>
-            <Filters />
-            <S.CenterblockContent className="centerblock__content">
-              <TrackListHeader />
-              {isLoading ? <TrackListPlug /> : <TracsList />}
-            </S.CenterblockContent>
-          </S.MainCenterblock>
-          <S.MainSidebar className="main__sidebar sidebar">
-            <User />
-            {isLoading ? <SideBarPlug /> : <SideBar />}
-          </S.MainSidebar>
-        </S.Main>
-        <S.Bar className="bar">{isLoading ? <PlayerPlug /> : <TracsPlayer />}</S.Bar>
-        <footer className="footer"></footer>
-      </S.Container>
-    </S.Wrapper>
-  );
-}
 export default App;

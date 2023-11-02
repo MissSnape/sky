@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import { TracsPlayer } from '../../components/TracsPlayer';
+import { Player } from '../../components/TracsPlayer';
 import { SideBar } from '../../components/SideBar';
 import { Filters } from '../../components/filters';
 import { Search } from '../../components/Search';
@@ -53,7 +53,7 @@ function Home() {
             </S.MainSidebar>
           </S.Main>
           <S.Bar className="bar">
-          {activTrack ? <TracsPlayer activTrack={activTrack} isPlaying={isPlaying} setIsPlaying={setIsPlaying}/> : null}</S.Bar>
+          {activTrack ? <Player activTrack={activTrack} isPlaying={isPlaying} setIsPlaying={setIsPlaying}/> : null}</S.Bar>
           <footer className="footer"></footer>
         </S.Container>
       </S.Wrapper>

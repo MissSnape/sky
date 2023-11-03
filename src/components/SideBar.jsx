@@ -1,37 +1,45 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import * as S from './SideBarStyle'
 function SideBar() {
     return (
-      <div className="sidebar__block">
-        <div className="sidebar__list">
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="#">
-              <img
+      <S.SidebarBlock className="sidebar__block">
+      <S.SidebarList className="sidebar__list">
+        <S.SidebarItem className="sidebar__item">
+          <NavLink to={`/collections/1`}>
+            <S.SidebarLink className="sidebar__link" href="#">
+              <S.SidebarImg
                 className="sidebar__img"
                 src="img/playlist01.png"
                 alt="day's playlist"
-              ></img>
-            </a>
-          </div>
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="#">
-              <img
+              ></S.SidebarImg>
+            </S.SidebarLink>
+          </NavLink>
+        </S.SidebarItem>
+        <S.SidebarItem className="sidebar__item">
+          <NavLink to={`/collections/2`}>
+            <S.SidebarLink className="sidebar__link" href="#">
+              <S.SidebarImg
                 className="sidebar__img"
                 src="img/playlist02.png"
                 alt="day's playlist"
-              ></img>
-            </a>
-          </div>
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="#">
-              <img
+              ></S.SidebarImg>
+            </S.SidebarLink>
+          </NavLink>
+        </S.SidebarItem>
+        <S.SidebarItem className="sidebar__item">
+          <NavLink to={`/collections/3`}>
+            <S.SidebarLink className="sidebar__link" href="#">
+              <S.SidebarImg
                 className="sidebar__img"
                 src="img/playlist03.png"
                 alt="day's playlist"
-              ></img>
-            </a>
-          </div>
-        </div>
-      </div>
+              ></S.SidebarImg>
+            </S.SidebarLink>
+          </NavLink>
+        </S.SidebarItem>
+      </S.SidebarList>
+    </S.SidebarBlock>
     );
   }
   

@@ -3,7 +3,7 @@ import * as S from './SideBarStyle';
 import { useUserContext } from '../context/usercontext';
 import { NavLink } from 'react-router-dom';
 
-function User() {
+function PersonalUser() {
   const {currentUser} = useUserContext();
   const logOut = () => {
     localStorage.clear();
@@ -23,4 +23,4 @@ function User() {
   );
 }
 
-export { User };
+export { PersonalUser };

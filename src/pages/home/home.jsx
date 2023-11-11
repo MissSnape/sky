@@ -5,7 +5,7 @@ import { SideBar } from '../../components/SideBar';
 import { Filters } from '../../components/filters';
 import { Search } from '../../components/Search';
 import { TrackListHeader } from '../../components/HeaderTrackList';
-import { User } from '../../components/users';
+import { PersonalUser } from '../../components/users';
 import { NavBurger } from '../../components/NavBurger';
 import { TracsList } from '../../components/TracsList';
 import { TrackListPlug } from '../../components/TrackListPlug';
@@ -48,7 +48,7 @@ function Home() {
               </S.CenterblockContent>
             </S.MainCenterblock>
             <S.MainSidebar className="main__sidebar sidebar">
-              <User />
+              <PersonalUser />
               {isLoading ? <SideBarPlug /> : <SideBar />}
             </S.MainSidebar>
           </S.Main>

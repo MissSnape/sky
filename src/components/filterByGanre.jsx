@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from './filterStyle';
 function Ganre({
-    toggleVisibility, filter
+    toggleVisibility, filter, tracks
   }) {
     return (
       <>
@@ -18,13 +18,13 @@ function Ganre({
         жанру
       </S.FilterButton>
       {filter === 'genre' && (
-        <S.FilterMenuRight  className="filter__menu filter__menu_right">
-          <S.FilterMenuItem className="filter__menu_item">Рок</S.FilterMenuItem>
-          <S.FilterMenuItem className="filter__menu_item">Хип-Хоп</S.FilterMenuItem>
-          <S.FilterMenuItem className="filter__menu_item">Поп-музыка</S.FilterMenuItem>
-          <S.FilterMenuItem className="filter__menu_item">Техно</S.FilterMenuItem>
-          <S.FilterMenuItem className="filter__menu_item">Инди</S.FilterMenuItem>
-        </S.FilterMenuRight>
+        <S.FilterMenuRight className="filter__menu filter__menu_right">
+        {tracks.map((track) => (
+          <S.FilterMenuItem key={track.id} className="filter__menu_item">
+            {track.genre}
+          </S.FilterMenuItem>
+        ))}
+      </S.FilterMenuRight>
       )}
     </>
     );

@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import * as S from './loginStyle';
-import { registerUser, loginUser } from '../../api';
+import { registerUser, loginUser, getUserToken} from '../../api';
 import { useEffect, useState } from 'react';
 import {useUserContext} from '../../context/usercontext';
 import React from 'react';
+
 
 export default function AuthPage({ isLoginMode }) {
   const [error, setError] = useState(null);
@@ -31,9 +32,23 @@ export default function AuthPage({ isLoginMode }) {
           setError(error.message);
           setButtonDisableStatus(false);
         });
+      getUserToken({ email, password })
+        .then((response) => {
+          localStorage.setItem(
+            'refreshToken',
+            JSON.stringify(response.refresh),
+          );
+          localStorage.setItem(
+            'accessToken',
+            JSON.stringify(response.access),
+          );
+          navigate('/');
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
     }
   };
-
   const handleRegister = async () => {
     setButtonDisableStatus(true);
     if (password !== repeatPassword) {
@@ -54,10 +69,11 @@ export default function AuthPage({ isLoginMode }) {
           setButtonDisableStatus(false);
         });
     }
- 
+    // alert(`Выполняется регистрация: ${email} ${password}`);
+    // setError("Неизвестная ошибка регистрации");
   };
 
-  
+  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
     setError(null);
   }, [isLoginMode, email, password, repeatPassword]);

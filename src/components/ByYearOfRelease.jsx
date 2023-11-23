@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from './filterStyle';
-function ByOfYearOfRelease({ toggleVisibility, filter }) {
+function ByOfYearOfRelease({ toggleVisibility, filter,  tracks}) {
     return (
       <>
       <S.FilterButton
@@ -19,11 +19,13 @@ function ByOfYearOfRelease({ toggleVisibility, filter }) {
         году выпуска
       </S.FilterButton>
       {filter === 'year' && (
-        <S.FilterMenuCenter className="filter__menu filter__menu_center">
-          <S.FilterMenuItem className="filter__menu_item">2023</S.FilterMenuItem>
-          <S.FilterMenuItem className="filter__menu_item">2022</S.FilterMenuItem>
-          <S.FilterMenuItem className="filter__menu_item">2021</S.FilterMenuItem>
-        </S.FilterMenuCenter>
+       <S.FilterMenuCenter className="filter__menu filter__menu_center">
+       {tracks.map((track) => (
+         <S.FilterMenuItem key={track.id} className="filter__menu_item">
+           {track.release_date}
+         </S.FilterMenuItem>
+       ))}
+     </S.FilterMenuCenter>
       )}
     </>
     );

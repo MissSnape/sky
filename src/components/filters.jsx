@@ -6,7 +6,7 @@ import * as S from './filterStyle';
 
 
 
-function Filters(){
+function Filters(tracks){
     const [filter, setVisible] = useState(null);
     const toggleVisibility = (name) => setVisible(name);
 
@@ -17,14 +17,17 @@ return(
   <ByArtist
     toggleVisibility={toggleVisibility}
     filter={filter}
+    tracks={tracks}
   />
   <ByOfYearOfRelease
     toggleVisibility={toggleVisibility}
     filter={filter}
+    tracks={tracks}
   />
   <Ganre
     toggleVisibility={toggleVisibility}
     filter={filter}
+    tracks={tracks}
   />
 </S.CenterblockFilter>
 );

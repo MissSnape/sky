@@ -8,11 +8,11 @@ import { NavBurger } from '../../components/NavBurger';
 import { TracsList } from '../../components/TracsList';
 import { TrackListPlug } from '../../components/TrackListPlug';
 //import { SideBarPlug } from '../../components/SideBarPlug';
-import * as S from './MyPlayListStyle';
+import * as S from './indieStyles';
 //import { useDispatch} from 'react-redux';
 import React, {useState, useEffect} from 'react';
 import getTrackList from '../../api';
-function MyPlayList() {
+function Indie() {
  
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoading, setLoadingStatus] = useState(true);
@@ -37,7 +37,7 @@ function MyPlayList() {
             <NavBurger />
             <S.MainCenterblock className="main__centerblock centerblock">
               <Search />
-              <S.CenterblockH2 className="centerblock__h2">Мои треки</S.CenterblockH2>
+              <S.CenterblockH2 className="centerblock__h2">Инди заряд</S.CenterblockH2>
               
               <S.CenterblockContent className="centerblock__content">
                 <TrackListHeader />
@@ -63,4 +63,4 @@ function MyPlayList() {
   );
 }
 
-export default MyPlayList;
+export default Indie;

@@ -3,10 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home/home';
 import Login from './pages/Login/login';
 import Collections from './pages/Collections/Collections';
-
+import Hits from './pages/hits/hits';
 import NotFound from './pages/NotFound/NotFound';
 import MyPlayList from './pages/MyPlayList/MyPlayList';
 import { ProtectedRoute } from './ProtectedRoute';
+import Indie from './pages/indie/indie';
 
 const AppRoutes = () => {
   return (
@@ -17,8 +18,10 @@ const AppRoutes = () => {
         }
       >
         <Route path="/" element={<Home />} />
-        <Route path="/category/:id" element={<Collections />} />
-        <Route path="/favorites" element={<MyPlayList />} />
+        <Route path="/Collections" element={<Collections />} />
+        <Route path="/MyPlayList" element={<MyPlayList />} />
+        <Route path="/Hits" element={<Hits/>} />
+        <Route path='/Indie' element={<Indie />}/>
       </Route>
       <Route path="*" element={<NotFound />} />
       <Route path="/login" element={<Login isLoginMode={true} />} />

@@ -6,7 +6,7 @@ function SideBar() {
       <S.SidebarBlock className="sidebar__block">
       <S.SidebarList className="sidebar__list">
         <S.SidebarItem className="sidebar__item">
-          <NavLink to={`/collections/1`}>
+          <NavLink to={`/Collections`}>
             <S.SidebarLink className="sidebar__link" href="#">
               <S.SidebarImg
                 className="sidebar__img"
@@ -17,7 +17,7 @@ function SideBar() {
           </NavLink>
         </S.SidebarItem>
         <S.SidebarItem className="sidebar__item">
-          <NavLink to={`/collections/2`}>
+          <NavLink to={`/Hits`}>
             <S.SidebarLink className="sidebar__link" href="#">
               <S.SidebarImg
                 className="sidebar__img"
@@ -28,7 +28,7 @@ function SideBar() {
           </NavLink>
         </S.SidebarItem>
         <S.SidebarItem className="sidebar__item">
-          <NavLink to={`/collections/3`}>
+          <NavLink to={`/Indie`}>
             <S.SidebarLink className="sidebar__link" href="#">
               <S.SidebarImg
                 className="sidebar__img"

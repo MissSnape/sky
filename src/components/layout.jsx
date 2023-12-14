@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import * as S from './layotStyle'
 import React from 'react';
-import { NavBurger } from './NavBurger';
+
 import { Player } from './TracsPlayer';
+import { NavBurger } from './NavBurger';
 function Layout() {
   const currentTrack = useSelector((store) => store.AudioPlayer.currentTrack);
   return (

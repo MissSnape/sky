@@ -1,24 +1,74 @@
 import { useEffect, useRef, useState } from 'react';
 import * as S from './TracksPayerStyle';
 import React from 'react';
-function Player({ activTrack, isPlaying, setIsPlaying }) {
-  const [isRepeat, setIsRepeat] = useState(false);
+import {
+  nextTrack,
+  pauseTrack,
+  playTrack,
+  prevTrack,
+  setRepeatState,
+  shuffleTracks,
+} from '../store/actions/creators/skymusic';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentTrackIdSelector } from '../store/selectors/skymusic';
+
+function Player() {
   const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const isRepeat = useSelector((store) => store.AudioPlayer.player.isRepeat);
+  const tracks = useSelector((store) => store.AudioPlayer.trackList);
+  const shuffledTrackList = useSelector((store) => store.AudioPlayer.shuffledTrackList);
+  const currentTrack = useSelector((store) => store.AudioPlayer.currentTrack);
+  const playingStatus = useSelector((store) => store.AudioPlayer.playing);
+  const shuffleStatus = useSelector((store) => store.AudioPlayer.shuffled);
   const audioComponentRef = useRef(null);
+  const getCurrentTrackList = () => {
+    if (shuffleStatus === false) {
+      return tracks;
+    } else {
+      return shuffledTrackList;
+    }
+  };
+  const currentTrackList = getCurrentTrackList();
+  const currentTrackId = useSelector(currentTrackIdSelector);
+  const currentTrackIndex = currentTrackList.findIndex(
+    (currentTrack) => currentTrack.id === currentTrackId,
+  );
+  const dispatch = useDispatch();
+  const nextTrackToggle = () => {
+    if (currentTrackIndex < tracks.length - 1) {
+      dispatch(nextTrack(currentTrackList[currentTrackIndex + 1]));
+      dispatch(playTrack(true));
+    } else {
+      console.log('Exit from if else');
+    }
+  };
+  const prevTrackToggle = () => {
+    if (currentTime < 5) {
+      if (currentTrackIndex >= 1) {
+        dispatch(prevTrack(currentTrackList[currentTrackIndex - 1]));
+        dispatch(playTrack(true));
+      } else {
+        console.log('Exit from if else');
+      }
+    } else {
+      const ref = audioComponentRef.current;
+      ref.currentTime = 0;
+    }
+  };
   const playClick = () => {
-    if (isPlaying) {
+    if (playingStatus) {
       audioComponentRef.current.pause();
-      setIsPlaying(false);
+      dispatch(pauseTrack(true));
     } else {
       audioComponentRef.current.play();
-      setIsPlaying(true);
+      dispatch(playTrack(true));
     }
   };
   const repeatClick = () => {
     audioComponentRef.current.loop = !isRepeat;
-    setIsRepeat(!isRepeat);
+    dispatch(setRepeatState(!isRepeat));
   };
   const volumeOnChange = (event) => {
     const newVolume = audioComponentRef.current.volume;
@@ -27,6 +77,14 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
   };
   const timeOnChange = (event) => {
     audioComponentRef.current.currentTime = event.target.value;
+  };
+
+  const shuffleToggle = () => {
+    if (shuffleStatus === false) {
+      dispatch(shuffleTracks(true, [...tracks].sort(() => Math.random() - 0.5)));
+    } else {
+      dispatch(shuffleTracks(false, []));
+    }
   };
   useEffect(() => {
     const ref = audioComponentRef.current;
@@ -46,11 +104,9 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
       ref.removeEventListener('timeupdate', timeUpdate);
     };
   });
-  const buttonPlug = () => alert('Еще не реализовано');
   return (
     <S.BarContent className="bar__content">
       <S.Timer>
-        
         {Math.trunc(currentTime / 60) < 10
           ? '0' + Math.trunc(currentTime / 60)
           : Math.trunc(currentTime / 60)}
@@ -69,9 +125,10 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
       </S.Timer>
       <S.AudioComponent
         controls
-        src={activTrack.track_file}
+        src={currentTrack.track_file}
         ref={audioComponentRef}
         autoPlay
+        onEnded={() => nextTrackToggle()}
       ></S.AudioComponent>
       <S.StyledProgressInput
         type="range"
@@ -90,7 +147,7 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
               <S.PlayerBtnPrevSvg
                 className="player__btn-prev-svg"
                 alt="prev"
-                onClick={buttonPlug}
+                onClick={prevTrackToggle}
               >
                 <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
               </S.PlayerBtnPrevSvg>
@@ -101,7 +158,7 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
                 alt="play"
                 onClick={playClick}
               >
-                {isPlaying ? (
+                {playingStatus ? (
                   <use xlinkHref="img/icon/sprite.svg#icon-pause"></use>
                 ) : (
                   <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
@@ -112,7 +169,7 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
               <S.PlayerBtnNextSvg
                 className="player__btn-next-svg"
                 alt="next"
-                onClick={buttonPlug}
+                onClick={nextTrackToggle}
               >
                 <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
               </S.PlayerBtnNextSvg>
@@ -133,7 +190,8 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
               <S.PlayerBtnShuffleSvg
                 className="player__btn-shuffle-svg"
                 alt="shuffle"
-                onClick={buttonPlug}
+                onClick={shuffleToggle}
+                $shuffleStatus={shuffleStatus}
               >
                 <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
               </S.PlayerBtnShuffleSvg>
@@ -152,7 +210,7 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
                   className="track-play__author-link"
                   href="http://"
                 >
-                  {activTrack.name}
+                  {currentTrack.name}
                 </S.TrackPlayAuthorLink>
               </S.TrackPlayAuthor>
               <S.TrackPlayAlbum className="track-play__album">
@@ -160,7 +218,7 @@ function Player({ activTrack, isPlaying, setIsPlaying }) {
                   className="track-play__album-link"
                   href="http://"
                 >
-                  {activTrack.author}
+                  {currentTrack.author}
                 </S.TrackPlayAlbumLink>
               </S.TrackPlayAlbum>
             </S.TrackPlayContain>

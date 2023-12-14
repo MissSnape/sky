@@ -10,6 +10,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import Indie from './pages/indie/indie';
 
 const AppRoutes = () => {
+  
   return (
     <Routes>
       <Route

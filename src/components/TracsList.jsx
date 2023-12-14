@@ -1,25 +1,47 @@
 import React from "react";
 import * as S from './tracsStyle';
 //import { tracks } from "../data";
-function TracsList({ setActivTrack, setIsPlaying, tracks}) {
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  crateTrackList,
+  setCurrentTrack,
+} from '../store/actions/creators/skymusic';
+import { currentTrackIdSelector } from '../store/selectors/skymusic';
+import { useAddLikeMutation, useRemoveLikeMutation } from '../services/skymusic';
+function TracsList({ data }) {
+  const playingStatus = useSelector((store) => store.AudioPlayer.playing);
+  const currentTrackId = useSelector(currentTrackIdSelector);
+  const pageType = useSelector((store) => store.AudioPlayer.currentPage);
+  const [addLike] = useAddLikeMutation();
+  const [removeLike] = useRemoveLikeMutation();
+  const userId = JSON.parse(localStorage.getItem('user')).id;
+  const dispatch = useDispatch();
   return (
     <S.ContentPlaylist className="content__playlist playlist">
-      {tracks.map((track) => (
-        <S.PlaylistItem
-          key={track.id}
-          className="playlist__item"
-          onClick={() => {
-
-            setActivTrack(track);
-            setIsPlaying(true);
-          }}
-         
-        >
+      {data.map((track) => (
+        <S.PlaylistItem key={track.id} className="playlist__item">
           <S.PlaylistTrack className="playlist__track track">
-            <S.TrackTitle className="track__title">
+            <S.TrackTitle
+              className="track__title"
+              onClick={() => {
+                dispatch(setCurrentTrack(track));
+                dispatch(crateTrackList(data));
+              }}
+            >
               <S.TrackTitleImg className="track__title-image">
-                <S.TrackTitleSvg className="track__title-svg" alt="music">
-                  <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                <S.TrackTitleSvg
+                  className={`${
+                    playingStatus && track.id === currentTrackId
+                      ? 'track__title-svg pulse-point'
+                      : 'track__title-svg'
+                  }`}
+                  alt="music"
+                >
+                  {track.id === currentTrackId ? (
+                    <use xlinkHref="img/icon/sprite.svg#pulse_point"></use>
+                  ) : (
+                    <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                  )}
                 </S.TrackTitleSvg>
               </S.TrackTitleImg>
               <div className="track__title-text">
@@ -40,8 +62,23 @@ function TracsList({ setActivTrack, setIsPlaying, tracks}) {
               </S.TrackAlbumLink>
             </S.TrackAlbum>
             <div className="track__time">
-              <S.TrackTimeSvg className="track__time-svg" alt="time">
-                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              <S.TrackTimeSvg
+                className="track__time-svg"
+                alt="time"
+                onClick={() => {
+                  pageType === 'myTracks' ? removeLike(track.id) :
+                  track.stared_user.some((user) => user['id'] === userId)
+                    ? removeLike(track.id)
+                    : addLike(track.id);
+                }}
+              >
+                {pageType === 'myTracks' ? (
+                  <use xlinkHref="img/icon/sprite.svg#icon-activ-like"></use>
+                ) : track.stared_user.some((user) => user['id'] === userId) ? (
+                  <use xlinkHref="img/icon/sprite.svg#icon-activ-like"></use>
+                ) : (
+                  <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                )}
               </S.TrackTimeSvg>
               <S.TrackTimeText className="track__time-text">
                 {track.duration_in_seconds}
@@ -53,5 +90,4 @@ function TracsList({ setActivTrack, setIsPlaying, tracks}) {
     </S.ContentPlaylist>
   );
 }
-
 export {TracsList};

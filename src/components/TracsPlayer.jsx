@@ -11,7 +11,7 @@ import {
 } from '../store/actions/creators/skymusic';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentTrackIdSelector } from '../store/selectors/skymusic';
-
+//почему не работает плеер. В браузере указывает как ошибку 
 function Player() {
   const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);

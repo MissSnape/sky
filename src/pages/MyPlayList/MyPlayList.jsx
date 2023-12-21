@@ -4,7 +4,7 @@
 import { Search } from '../../components/Search';
 import { TrackListHeader } from '../../components/HeaderTrackList';
 import { PersonalUser } from '../../components/users';
-import { NavBurger } from '../../components/NavBurger';
+//import { NavBurger } from '../../components/NavBurger';
 import { TracsList } from '../../components/TracsList';
 import { TrackListPlug } from '../../components/TrackListPlug';
 //import { SideBarPlug } from '../../components/SideBarPlug';
@@ -21,10 +21,8 @@ function MyPlayList() {
   dispatch(setCurrentPage('myTracks'));
   return (
     <>
-    <S.Wrapper className="wrapper">
-        <S.Container className="container">
-          <S.Main className="main">
-            <NavBurger />
+    
+            
       <S.MainCenterblock className="main__centerblock centerblock">
         <Search />
         <S.CenterblockH2 className="centerblock__h2">Мои треки</S.CenterblockH2>
@@ -42,9 +40,7 @@ function MyPlayList() {
       <S.MainSidebar className="main__sidebar sidebar">
         <PersonalUser />
       </S.MainSidebar>
-      </S.Main>
-      </S.Container>
-      </S.Wrapper>
+      
     </>
   );
 }

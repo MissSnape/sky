@@ -1,23 +1,23 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const DATA_TAG = { type: "Tracks", id: "LIST" };
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+const DATA_TAG = { type: 'Tracks', id: 'LIST' };
 export const tracksApi = createApi({
-  reducerPath: "tracksApi",
+  reducerPath: 'tracksApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://skypro-music-api.skyeng.tech/catalog/",
+    baseUrl: 'https://skypro-music-api.skyeng.tech/catalog',
   }),
   endpoints: (builder) => ({
     getTracks: builder.query({
       query: () => ({
-        url: "track/all/",
+        url: '/track/all/',
       }),
       providesTags: () => [DATA_TAG],
     }),
     getFavoritesTracks: builder.query({
       query: () => ({
-        url: "track/favorite/all/",
+        url: '/track/favorite/all/',
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem("accessToken")
+            localStorage.getItem('accessToken'),
           )}`,
         },
       }),
@@ -25,11 +25,11 @@ export const tracksApi = createApi({
     }),
     addLike: builder.mutation({
       query: (id) => ({
-        url: `track/${id}/favorite/`,
-        method: "POST",
+        url: `/track/${id}/favorite/`,
+        method: 'POST',
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem("accessToken")
+            localStorage.getItem('accessToken'),
           )}`,
         },
       }),
@@ -37,11 +37,11 @@ export const tracksApi = createApi({
     }),
     removeLike: builder.mutation({
       query: (id) => ({
-        url: `track/${id}/favorite/`,
-        method: "DELETE",
+        url: `/track/${id}/favorite/`,
+        method: 'DELETE',
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem("accessToken")
+            localStorage.getItem('accessToken'),
           )}`,
         },
       }),

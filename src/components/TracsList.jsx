@@ -15,7 +15,9 @@ function TracsList({ data }) {
   const pageType = useSelector((store) => store.AudioPlayer.currentPage);
   const [addLike, {isLoading}] = useAddLikeMutation();
   const [removeLike] = useRemoveLikeMutation();
-  const userId = JSON.parse(localStorage.getItem('user')).id;
+  const userS = JSON.parse(localStorage.getItem('user'));
+  const userId = userS.id;
+  console.log(userId)
   const dispatch = useDispatch();
   return (
     <S.ContentPlaylist className="content__playlist playlist">
@@ -67,24 +69,28 @@ function TracsList({ data }) {
               className="track__time-svg"
               alt="time"
               onClick={() => {
-                pageType === 'myTracks'
+                pageType === 'myTracks' 
                
                   ? removeLike(track.id)
-                  : track.stared_user.some((user) => user['id'] === userId)
-                  {isLoading 
+                  : pageType === 'home' || track.stared_user?.some((user) => user['id']=== userId)
+                  {isLoading
                   ? removeLike(track.id)
                   :  addLike(track.id);
                 }
               }}
             
             >
-              {pageType === 'myTracks' ? (
-                <use xlinkHref='../../public/img/icon/like.svg'></use>
-              ) : track.stared_user.some((user) => user['id'] === userId) ? (
-                <use xlinkHref='../../public/img/icon/dislike.svg'></use>
+              
+              {pageType === 'myTracks'  ? (
+                <use xlinkHref="img/icon/sprite.svg#icon-activ-like"></use>
+              ) : pageType === 'home' || track.stared_user?.some((user) => user['id'] === userId) 
+              ? (
+                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
               ) : (
-                <use xlinkHref='../../public/img/icon/like.svg'></use>
+                <use xlinkHref="img/icon/sprite.svg#icon-activ-like"></use>
+              
               )}
+              
             </S.TrackTimeSvg>
             <S.TrackTimeText className="track__time-text">
               {track.duration_in_seconds}

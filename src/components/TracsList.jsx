@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from './tracsStyle';
-
+import { useUserContext } from "../context/usercontext";
 //import { tracks } from "../data";
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -15,14 +15,21 @@ function TracsList({ data }) {
   const pageType = useSelector((store) => store.AudioPlayer.currentPage);
   const [addLike, {isLoading}] = useAddLikeMutation();
   const [removeLike] = useRemoveLikeMutation();
-  const userS = JSON.parse(localStorage.getItem('user'));
-  const userId = userS.id;
-  console.log(userId)
+  const {currentUser} = useUserContext();
+  const userId = currentUser.id;
+  
   const dispatch = useDispatch();
   return (
+   
     <S.ContentPlaylist className="content__playlist playlist">
+       {console.log(data)}
+       {console.log('userID', userId)}
+
     {data.map((track) => (
+      
       <S.PlaylistItem key={track.id} className="playlist__item">
+        {console.log('trackId', track.id)}
+        {console.log('currentTrackId', currentTrackId)}
         <S.PlaylistTrack className="playlist__track track">
           <S.TrackTitle
             className="track__title"
@@ -72,7 +79,7 @@ function TracsList({ data }) {
                 pageType === 'myTracks' 
                
                   ? removeLike(track.id)
-                  : pageType === 'home' || track.stared_user?.some((user) => user['id']=== userId)
+                  : pageType === 'home' || track.stared_user?.find((user) => user['id']=== userId)
                   {isLoading
                   ? removeLike(track.id)
                   :  addLike(track.id);
@@ -83,11 +90,13 @@ function TracsList({ data }) {
               
               {pageType === 'myTracks'  ? (
                 <use xlinkHref="img/icon/sprite.svg#icon-activ-like"></use>
-              ) : pageType === 'home' || track.stared_user?.some((user) => user['id'] === userId) 
+              ) : track.stared_user?.find((user) => user['id'] === userId) 
               ? (
-                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-              ) : (
+
                 <use xlinkHref="img/icon/sprite.svg#icon-activ-like"></use>
+              ) : (
+                
+                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
               
               )}
               

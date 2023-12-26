@@ -27,6 +27,7 @@ export default function AuthPage({ isLoginMode }) {
           setButtonDisableStatus(false);
           setCurrentUser(JSON.parse(localStorage.getItem('user')));
           navigate('/');
+          
         })
         .catch((error) => {
           setError(error.message);

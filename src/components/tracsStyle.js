@@ -42,7 +42,7 @@ export const ContentPlaylist = styled.div`
 display: flex;
 flex-direction: column;
 overflow-y: scroll;
-height: 500px;
+height: 750px;
 
 `;
 

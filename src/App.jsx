@@ -1,20 +1,14 @@
-import React from 'react';
-import AppRoutes from './routes';
-import { UserContext } from './context/usercontext';
-import  { useState } from 'react';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+import React from "react";
+import { AppRoutes } from "./routers";
 
-const App = () => {
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
-  
+function App() {
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-      <Provider store={store}>
+    <div className="App">
+      <div className="App-layout">
         <AppRoutes />
-      </Provider>
-    </UserContext.Provider>
+      </div>
+    </div>
   );
-};
+}
 
 export default App;

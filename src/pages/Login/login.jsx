@@ -27,6 +27,7 @@ export default function AuthPage({ isLoginMode }) {
           setButtonDisableStatus(false);
           setCurrentUser(JSON.parse(localStorage.getItem('user')));
           navigate('/');
+          
         })
         .catch((error) => {
           setError(error.message);
@@ -69,8 +70,7 @@ export default function AuthPage({ isLoginMode }) {
           setButtonDisableStatus(false);
         });
     }
-    // alert(`Выполняется регистрация: ${email} ${password}`);
-    // setError("Неизвестная ошибка регистрации");
+    
   };
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы

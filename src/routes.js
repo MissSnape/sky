@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home/home';
 import Login from './pages/Login/login';
@@ -8,16 +8,31 @@ import NotFound from './pages/NotFound/NotFound';
 import MyPlayList from './pages/MyPlayList/MyPlayList';
 import { ProtectedRoute } from './ProtectedRoute';
 import Indie from './pages/indie/indie';
-
+import Layout from './components/layout';
 const AppRoutes = () => {
+  const [isLoading, setLoadingStatus] = useState(true);
+  const [newApiError, setNewApiError] = useState(null);
   return (
     <Routes>
-      <Route
+       <Route
         element={
           <ProtectedRoute isAllowed={Boolean(localStorage.getItem('user'))} />
         }
-      >
-        <Route path="/" element={<Home />} />
+      ></Route>
+     <Route
+          path="/"
+          element={
+            <Layout
+              isLoading={isLoading}
+              setLoadingStatus={setLoadingStatus}
+              setNewApiError={setNewApiError}
+            />
+          }
+        >
+        <Route
+            index
+            element={<Home isLoading={isLoading} newApiError={newApiError} />}
+          />
         <Route path="/Collections" element={<Collections />} />
         <Route path="/MyPlayList" element={<MyPlayList />} />
         <Route path="/Hits" element={<Hits/>} />

@@ -39,9 +39,11 @@ export const PlaylistTitleSvg = styled.svg`
 `;
 
 export const ContentPlaylist = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
+display: flex;
+flex-direction: column;
+overflow-y: scroll;
+height: 750px;
+
 `;
 
 export const PlaylistTrack = styled.div`
